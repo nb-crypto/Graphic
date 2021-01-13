@@ -5,19 +5,19 @@ import de.fachinformatiker.ae.baudis.graphic.Primitive;
 public class Rectangel implements Primitive {
 
     private Point lowerLeftPoint;
-    private int width;
-    private int heigth;
+    private double width;
+    private double height;
 
 
     public Rectangel(){
         this.lowerLeftPoint = new Point(0, 0);
         this.width = 1;
-        this.heigth = 1;
+        this.height = 1;
     }
-    public Rectangel(Point lowerLeftPoint, int width, int heigth) {
+    public Rectangel(Point lowerLeftPoint, double width, double height) {
         this.lowerLeftPoint = lowerLeftPoint;
         this.width = width;
-        this.heigth = heigth;
+        this.height = height;
     }
 
     public Point getLowerLeftPoint() {
@@ -28,19 +28,19 @@ public class Rectangel implements Primitive {
         this.lowerLeftPoint = lowerLeftPoint;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
-    public int getHeigth() {
-        return heigth;
+    public double getHeight() {
+        return height;
     }
 
-    public void setHeigth(int heigth) {
-        this.heigth = heigth;
+    public void setHeight(double height) {
+        this.height = height;
     }
 }

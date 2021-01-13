@@ -5,18 +5,18 @@ import de.fachinformatiker.ae.baudis.graphic.Primitive;
 public class Oval implements Primitive {
 
     private Point middlePoint;
-    private int width;
-    private int heigth;
+    private double width;
+    private double height;
 
     public Oval(){
         this.middlePoint = new Point();
         this.width = 1;
-        this.heigth = 1;
+        this.height = 1;
     }
-    public Oval(Point middlePoint, int width, int heigth) {
+    public Oval(Point middlePoint, double width, double height) {
         this.middlePoint = middlePoint;
         this.width = width;
-        this.heigth = heigth;
+        this.height = height;
     }
 
     public Point getMiddlePoint() {
@@ -27,19 +27,19 @@ public class Oval implements Primitive {
         this.middlePoint = middlePoint;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
-    public int getHeigth() {
-        return heigth;
+    public double getHeight() {
+        return height;
     }
 
-    public void setHeigth(int heigth) {
-        this.heigth = heigth;
+    public void setHeight(double height) {
+        this.height = height;
     }
 }

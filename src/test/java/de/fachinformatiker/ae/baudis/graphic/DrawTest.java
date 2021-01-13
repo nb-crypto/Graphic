@@ -1,72 +1,120 @@
 package de.fachinformatiker.ae.baudis.graphic;
 
+import de.fachinformatiker.ae.baudis.graphic.primitive.Line;
 import de.fachinformatiker.ae.baudis.graphic.primitive.Oval;
 import de.fachinformatiker.ae.baudis.graphic.primitive.Point;
 import de.fachinformatiker.ae.baudis.graphic.primitive.Rectangel;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DrawTest {
+    Draw draw;
+
+    @BeforeEach
+    void beforeEach(){
+        draw = new Draw();
+    }
 
     @Test
     void testAdd(){
-        Draw field = new Draw();
         Point point = new Point();
         Oval oval = new Oval();
         Rectangel rectangel = new Rectangel();
 
-        field.add(point);
-        field.add(oval);
-        field.add(rectangel);
+        draw.add(point);
+        draw.add(oval);
+        draw.add(rectangel);
 
-        int size = field.getSize();
+        int size = draw.getSizePrimitives();
         assertEquals(3, size);
     }
 
     @Test
     void testRemove(){
-        Draw field = new Draw();
         Point point = new Point();
         Oval oval = new Oval();
         Rectangel rectangel = new Rectangel();
 
-        field.add(point);
-        field.add(oval);
-        field.add(rectangel);
-        field.remove(2);
+        draw.add(point);
+        draw.add(oval);
+        draw.add(rectangel);
+        draw.remove(2);
 
-        int size = field.getSize();
+        int size = draw.getSizePrimitives();
         assertEquals(2, size);
     }
 
     @Test
     void testGetPrimitive(){
-        Draw field = new Draw();
         Point point = new Point();
         Oval oval = new Oval();
         Rectangel rectangel = new Rectangel();
 
-        field.add(point);
-        field.add(oval);
-        field.add(rectangel);
+        draw.add(point);
+        draw.add(oval);
+        draw.add(rectangel);
 
-        assertEquals(point, field.getPrimitive(0));
+        assertEquals(point, draw.getPrimitive(0));
     }
 
     @Test
-    void testUndo(){
-        Draw field = new Draw();
+    void testGetPrimitiveNull(){
+        Point point = new Point();
+        draw.add(point);
+        assertNotNull(draw.getPrimitive(0));
+        assertNull(draw.getPrimitive(7));
+        assertNull(draw.getPrimitive(-1));
+        assertNull(draw.getPrimitive(1));
+        assertNull(draw.getPrimitive(-789));
+        assertNull(draw.getPrimitive(Integer.MAX_VALUE));
+    }
+
+    @Test
+    void testUndoAdd(){
         Point point = new Point();
         Oval oval = new Oval();
         Rectangel rectangel = new Rectangel();
 
-        field.add(point);
-        field.add(oval);
-        field.add(rectangel);
-        field.undo();
+        draw.add(point);
+        draw.add(oval);
+        draw.add(rectangel);
+        draw.undoAdd();
 
-        int size = field.getSize();
+        int size = draw.getSizePrimitives();
         assertEquals(2, size);
     }
+
+    @Test
+    void testObservable(){
+        int[] counter = {0};
+        Observer observer = new Observer() {
+            @Override
+            public void update(Observable observable) {
+                counter[0]++;
+            }
+        };
+        Draw draw = new Draw();
+        draw.addObserver(observer);
+        Point point = new Point();
+        Oval oval = new Oval();
+        Rectangel rectangel = new Rectangel();
+        Line line = new Line();
+
+        draw.add(point);
+        draw.add(oval);
+        draw.add(rectangel);
+        draw.add(line);
+
+        draw.remove(oval);
+        assertEquals(5, counter[0]);
+
+        draw.removeObserver(observer);
+        draw.add(line);
+        assertEquals(5, counter[0]);
+
+    }
+
 }

@@ -4,32 +4,32 @@ import de.fachinformatiker.ae.baudis.graphic.Primitive;
 
 public class Point implements Primitive {
 
-     private int x;
-     private int y;
+     private double x;
+     private double y;
 
     public Point(){
-        setX(0);
-        setY(0);
+        setX(0.);
+        setY(0.);
     }
 
-    public Point(int x, int y) {
+    public Point(double x, double y) {
         setX(x);
         setY(y);
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
