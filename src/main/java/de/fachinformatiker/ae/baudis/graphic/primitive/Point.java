@@ -12,6 +12,12 @@ public class Point implements Primitive {
         setY(0.);
     }
 
+    public Point(Point point) {
+        this.x = point.x;
+        this.y = point.y;
+    }
+
+
     public Point(double x, double y) {
         setX(x);
         setY(y);
@@ -33,4 +39,12 @@ public class Point implements Primitive {
         this.y = y;
     }
 
+
+    @Override
+    public String toString() {
+        return "Point(" +
+                "x=" + x +
+                ", y=" + y +
+                ')';
+    }
 }

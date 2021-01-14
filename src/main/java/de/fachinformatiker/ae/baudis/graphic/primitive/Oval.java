@@ -19,6 +19,18 @@ public class Oval implements Primitive {
         this.height = height;
     }
 
+    public Oval(Point middlePoint, double radius) {
+        this.middlePoint = middlePoint;
+        this.width = radius;
+        this.height = radius;
+    }
+
+    public Oval(Oval oval) {
+        this.middlePoint = oval.middlePoint;
+        this.height = oval.height;
+        this.width = oval.width;
+    }
+
     public Point getMiddlePoint() {
         return middlePoint;
     }
@@ -41,5 +53,15 @@ public class Oval implements Primitive {
 
     public void setHeight(double height) {
         this.height = height;
+    }
+
+    @Override
+    public String toString() {
+        return "Oval[" +
+                "middlePoint= (" + middlePoint.getX() +
+                ", " + middlePoint.getY() +
+                "), width=" + width +
+                ", height=" + height +
+                ']';
     }
 }

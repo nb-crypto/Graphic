@@ -17,6 +17,10 @@ public class Line implements Primitive {
         this.end = end;
     }
 
+    public Line(Line line) {
+        this.start = line.start;
+        this.end = line.end;
+    }
     public Point getStart() {
         return start;
     }
@@ -33,4 +37,13 @@ public class Line implements Primitive {
         this.end = end;
     }
 
+    @Override
+    public String toString() {
+        return "Line[" +
+                "start Point= (" + start.getX() +
+                ", " + start.getY() +
+                ") , end Point= (" + end.getX() +
+                ", " + end.getY() +
+                ")]";
+    }
 }

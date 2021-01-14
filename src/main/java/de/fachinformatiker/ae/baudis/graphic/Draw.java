@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Draw implements Primitive, Observable{
+public class Draw implements Primitive, GraphicObservable {
 
     private List<Primitive> primitives = new ArrayList<>();
-    private Collection<Observer> observers = new ArrayList<>();
+    private Collection<GraphicObserver> graphicObservers = new ArrayList<>();
 
     public void add(Primitive primitive){
-        primitives.add(primitive);
-        notifyObservers();
+        if (primitive != null) {
+            primitives.add(primitive);
+            notifyObservers("add", primitive);
+        }
     }
 
     public int getSizePrimitives() {
@@ -19,49 +21,53 @@ public class Draw implements Primitive, Observable{
     }
 
     public void remove(Primitive primitive){
-        boolean removed = this.primitives.remove(primitive);
-        if (removed){
-            notifyObservers();
+        for (int i = 0; i < primitives.size(); i++){
+            if (primitive == primitives.get(i)){
+                remove(i);
+            }
         }
     }
 
     public void remove(int index){
+
         if (index < primitives.size() && index >= 0) {
+            Primitive primitive = getPrimitive(index);
             primitives.remove(index);
-            notifyObservers();
+            notifyObservers("remove", primitive);
         }
     }
 
     public Primitive getPrimitive(int i) {
-        if (primitives.size() > i && i >= 0) {
+        //if (primitives.size() > i && i >= 0) {
             return primitives.get(i);
-        }
-        else return null;
+       // }
+        //else return null;
     }
 
     public void undoAdd(){
         if (primitives.size() != 0) {
-            primitives.remove(primitives.size() - 1);
-            notifyObservers();
+            Primitive primitive = getPrimitive(primitives.size() - 1);
+            primitives.remove(primitive);
+            notifyObservers("remove", primitive);
         }
     }
     
-    public void addObserver(Observer observer){
-        if (observers == null){
-            observers = new ArrayList<>();
+    public void addObserver(GraphicObserver graphicObserver){
+        if (graphicObservers == null){
+            graphicObservers = new ArrayList<>();
         }
-        if (!observers.contains(observer)){
-        observers.add(observer);
+        if (!graphicObservers.contains(graphicObserver)){
+        graphicObservers.add(graphicObserver);
         }
     }
     
-    public void removeObserver(Observer observer){
-        observers.remove(observer);
+    public void removeObserver(GraphicObserver graphicObserver){
+        graphicObservers.remove(graphicObserver);
     }
     
-    private void notifyObservers(){
-        for (Observer o: observers) {
-            o.update(this);
+    private void notifyObservers(String action, Primitive primitive){
+        for (GraphicObserver o: graphicObservers) {
+            o.update(this, action, primitive);
         }
     }
 }
