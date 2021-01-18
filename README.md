@@ -33,9 +33,18 @@ können
 
 - Wiederholung Tage 1-3
 
--Überarbeiten des gesamten Codes, toString in den primitiven Klassen, copyConstructor
+- Überarbeiten des gesamten Codes, toString in den primitiven Klassen, copyConstructor
 
 - in Rectangle ein constructor für Quadrate, in Oval ein constructor für Kreise
+
+
+#### Tag4
+
+- Wiederholung der Vorwoche
+- Grafikentwurf eines Menüsystems für Kommandozeilentool:
+
+! [Menue] (images/terminal menue.png "Terminalmenue")
+
 
 ### nice to know (for me)
 #### git tags
