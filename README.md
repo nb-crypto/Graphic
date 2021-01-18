@@ -43,9 +43,9 @@ können
 - Wiederholung der Vorwoche
 - Grafikentwurf eines Menüsystems für Kommandozeilentool:
 
-![Menue](images/terminalMenue.png "Terminalmenue")
+![Menue](images/terminalMenue.png "Terminalmenu")
 
-
+- Einführung state Pattern fürs Terminalmenü
 ### nice to know (for me)
 #### git tags
 
