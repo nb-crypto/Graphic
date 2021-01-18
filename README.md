@@ -43,7 +43,7 @@ können
 - Wiederholung der Vorwoche
 - Grafikentwurf eines Menüsystems für Kommandozeilentool:
 
-! [Menue] (images/terminal menue.png "Terminalmenue")
+![Menue](images/terminal menue.png "Terminalmenue")
 
 
 ### nice to know (for me)
