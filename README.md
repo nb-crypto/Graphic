@@ -46,6 +46,14 @@ können
 ![Menue](images/terminalMenue.png "Terminalmenu")
 
 - Einführung state Pattern fürs Terminalmenü
+
+#### Tag5
+
+- UML Diagramm fürs statePattern Menü
+![UMLMenu](images/umlmenu.png)
+
+- Methoden für die states des Menüs
+
 ### nice to know (for me)
 #### git tags
 

@@ -4,14 +4,14 @@ import de.fachinformatiker.ae.baudis.graphic.Draw;
 
 import java.util.Scanner;
 
-public class DrawableMenu implements  MenuState{
+public class DrawableMenu implements MenuState {
     @Override
     public void printMenu() {
+        System.out.println("Edit Drawing");
         System.out.println("(1) add");
         System.out.println("(2) remove");
         System.out.println("(3) copy");
         System.out.println("(4) list");
-        System.out.println("(5) save");
         System.out.println("(x) back");
     }
 
@@ -21,7 +21,7 @@ public class DrawableMenu implements  MenuState{
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         boolean exit = false;
-        while(!exit){
+        while (!exit) {
             switch (input) {
                 case "1":
                     state = new AddMenu();
@@ -31,22 +31,20 @@ public class DrawableMenu implements  MenuState{
                     state = new RemoveMenu();
                     exit = true;
                     break;
-               case "3":
-                   System.out.println("Which index?");
-                   input = scanner.nextLine();
+                case "3":
+                    state = new CopyMenu();
+                    exit = true;
 
                     break;
-               case "4":
-                   showDrawing(draw);
-                   state = new DrawableMenu();
-                   exit = true;
-                   break;
-               case "5":
-                   break;
-               case "x":
-                   exit = true;
-                   state = new MainMenu();
-                   break;
+                case "4":
+                    showDrawing(draw);
+                    state = new DrawableMenu();
+                    exit = true;
+                    break;
+                case "x":
+                    exit = true;
+                    state = new MainMenu();
+                    break;
 
             }
         }
@@ -54,9 +52,10 @@ public class DrawableMenu implements  MenuState{
 
     }
 
-    public void showDrawing(Draw draw){
-        for (int i = 0; i < draw.getSizePrimitives(); i++){
+    public void showDrawing(Draw draw) {
+        for (int i = 0; i < draw.getSizePrimitives(); i++) {
             System.out.println("Index: " + (i + 1) + "\tPrimitive: " + draw.getPrimitive(i));
         }
+        System.out.println();
     }
 }

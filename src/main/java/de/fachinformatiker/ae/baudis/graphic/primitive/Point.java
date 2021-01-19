@@ -4,10 +4,10 @@ import de.fachinformatiker.ae.baudis.graphic.Primitive;
 
 public class Point implements Primitive {
 
-     private double x;
-     private double y;
+    private double x;
+    private double y;
 
-    public Point(){
+    public Point() {
         setX(0.);
         setY(0.);
     }
@@ -42,9 +42,8 @@ public class Point implements Primitive {
 
     @Override
     public String toString() {
-        return "Point(" +
-                "x=" + x +
-                ", y=" + y +
+        return "Point (" + x +
+                ", " + y +
                 ')';
     }
 }

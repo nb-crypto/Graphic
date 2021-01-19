@@ -8,11 +8,12 @@ public class Oval implements Primitive {
     private double width;
     private double height;
 
-    public Oval(){
+    public Oval() {
         this.middlePoint = new Point();
         this.width = 1;
         this.height = 1;
     }
+
     public Oval(Point middlePoint, double width, double height) {
         this.middlePoint = middlePoint;
         this.width = width;
@@ -58,10 +59,10 @@ public class Oval implements Primitive {
     @Override
     public String toString() {
         return "Oval[" +
-                "middlePoint= (" + middlePoint.getX() +
+                "middlePoint (" + middlePoint.getX() +
                 ", " + middlePoint.getY() +
-                "), width=" + width +
-                ", height=" + height +
+                "), width = " + width +
+                ", height = " + height +
                 ']';
     }
 }

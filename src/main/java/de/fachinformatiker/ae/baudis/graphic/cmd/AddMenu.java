@@ -12,24 +12,26 @@ public class AddMenu implements MenuState {
 
     @Override
     public void printMenu() {
-        System.out.println("Which primitive?");
+        System.out.println("Add which primitive?");
         System.out.println("(1) Point");
         System.out.println("(2) Line");
         System.out.println("(3) Ellipse");
         System.out.println("(4) Rectangle");
-        System.out.println("(x) Back");
+        System.out.println("(x) Cancel");
     }
 
     @Override
     public MenuState processMenu(Draw draw) {
         MenuState state = null;
+        double[] parameters;
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         boolean exit = false;
-        while(!exit){
+        while (!exit) {
             switch (input) {
                 case "1":
-                    Point point = setParametersPoint();
+                    parameters = setParametersPoint1();
+                    Point point = new Point(parameters[0], parameters[1]);
                     draw.add(point);
                     exit = true;
                     state = new DrawableMenu();
@@ -47,7 +49,7 @@ public class AddMenu implements MenuState {
                     state = new DrawableMenu();
                     break;
                 case "4":
-                    Rectangle rectangle = new Rectangle();
+                    Rectangle rectangle = setParametersRectangle();
                     draw.add(rectangle);
                     exit = true;
                     state = new DrawableMenu();
@@ -63,14 +65,10 @@ public class AddMenu implements MenuState {
         return state;
     }
 
-    private Oval setParametersOval() {
-        Scanner scanner = new Scanner(System.in);
-        Point middlePoint = setParametersPoint();
-        System.out.println("Type width");
-        double width = scanner.nextDouble();
-        System.out.println("Type height");
-        double height = scanner.nextDouble();
-        return new Oval(middlePoint, width, height);
+    private double[] setParameters() {
+        double[] parameters;
+
+        return null;
     }
 
     private Point setParametersPoint() {
@@ -82,7 +80,39 @@ public class AddMenu implements MenuState {
         return new Point(x, y);
     }
 
-    private Line setParametersLine(){
+    private Oval setParametersOval() {
+        Scanner scanner = new Scanner(System.in);
+        Point middlePoint = setParametersPoint();
+        System.out.println("Type width");
+        double width = scanner.nextDouble();
+        System.out.println("Type height");
+        double height = scanner.nextDouble();
+        return new Oval(middlePoint, width, height);
+    }
+
+    private Rectangle setParametersRectangle() {
+        Scanner scanner = new Scanner(System.in);
+        Point middlePoint = setParametersPoint();
+        System.out.println("Type width");
+        double width = scanner.nextDouble();
+        System.out.println("Type height");
+        double height = scanner.nextDouble();
+        return new Rectangle(middlePoint, width, height);
+    }
+
+    private double[] setParametersPoint1() {
+        double[] parameters = new double[2];
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Type x-coordinate: ");
+        double x = scanner.nextDouble();
+        System.out.println("Type y-coordinate: ");
+        double y = scanner.nextDouble();
+        parameters[0] = x;
+        parameters[1] = y;
+        return parameters;
+    }
+
+    private Line setParametersLine() {
         System.out.println("Start Point");
         Point startPoint = setParametersPoint();
         System.out.println("End Point");

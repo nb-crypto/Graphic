@@ -6,16 +6,16 @@ public class Menu {
     private Draw draw = new Draw();
     private MenuState state = new MainMenu();
 
-    public void printMenu(){
+    private void printMenu() {
         state.printMenu();
     }
 
-    public MenuState processMenu(){
+    private MenuState processMenu() {
         return state.processMenu(draw);
     }
 
     private void handleMenu() {
-        while (state != null){
+        while (state != null) {
             printMenu();
             state = processMenu();
         }

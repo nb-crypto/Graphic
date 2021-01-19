@@ -9,11 +9,12 @@ public class Rectangle implements Primitive {
     private double height;
 
 
-    public Rectangle(){
+    public Rectangle() {
         this.lowerLeftPoint = new Point(0, 0);
         this.width = 1;
         this.height = 1;
     }
+
     public Rectangle(Point lowerLeftPoint, double width, double height) {
         this.lowerLeftPoint = lowerLeftPoint;
         this.width = width;
@@ -59,10 +60,10 @@ public class Rectangle implements Primitive {
     @Override
     public String toString() {
         return "Rectangle[" +
-                "lowerLeftPoint= (" + lowerLeftPoint.getX() +
+                "lowerLeftPoint (" + lowerLeftPoint.getX() +
                 ", " + lowerLeftPoint.getY() +
-                "), width=" + width +
-                ", height=" + height +
+                "), width = " + width +
+                ", height = " + height +
                 ']';
     }
 }

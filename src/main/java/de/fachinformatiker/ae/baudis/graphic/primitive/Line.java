@@ -7,7 +7,7 @@ public class Line implements Primitive {
     private Point start;
     private Point end;
 
-    public Line(){
+    public Line() {
         this.start = new Point();
         this.end = new Point(1, 1);
     }
@@ -21,6 +21,7 @@ public class Line implements Primitive {
         this.start = line.start;
         this.end = line.end;
     }
+
     public Point getStart() {
         return start;
     }
@@ -40,9 +41,9 @@ public class Line implements Primitive {
     @Override
     public String toString() {
         return "Line[" +
-                "start Point= (" + start.getX() +
+                "startPoint (" + start.getX() +
                 ", " + start.getY() +
-                ") , end Point= (" + end.getX() +
+                ") , endPoint (" + end.getX() +
                 ", " + end.getY() +
                 ")]";
     }
