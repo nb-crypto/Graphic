@@ -26,7 +26,7 @@ public class SaveMenu implements MenuState {
 
                 case "x":
                     exit = true;
-                    state = new DrawableMenu();
+                    state = new MainMenu();
             }
         }
         return state;
