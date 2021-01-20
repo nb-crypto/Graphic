@@ -1,13 +1,25 @@
 package de.fachinformatiker.ae.baudis.graphic;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
-public class Draw implements Primitive, GraphicObservable {
+public class Draw implements Primitive, GraphicObservable, Serializable {
 
     private List<Primitive> primitives = new ArrayList<>();
-    private Collection<GraphicObserver> graphicObservers = new ArrayList<>();
+    private List<GraphicObserver> graphicObservers = new ArrayList<>();
+
+
+    public void drawLoad(Draw draw){
+        if (draw != null) {
+            primitives = draw.primitives;
+            graphicObservers = draw.graphicObservers;
+        }
+    }
 
     public void add(Primitive primitive) {
         if (primitive != null) {
@@ -73,6 +85,14 @@ public class Draw implements Primitive, GraphicObservable {
 
     public void clear() {
         primitives.clear();
-        notifyObservers("Clear", null);
+        notifyObservers("clear", null);
+    }
+
+    public GraphicObserver getGraphicObserver(int i) {
+        return graphicObservers.get(i);
+    }
+
+    public int getSizeGraphicObservers() {
+        return graphicObservers.size();
     }
 }

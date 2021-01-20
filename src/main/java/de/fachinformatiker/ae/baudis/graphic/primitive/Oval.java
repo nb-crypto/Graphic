@@ -2,7 +2,9 @@ package de.fachinformatiker.ae.baudis.graphic.primitive;
 
 import de.fachinformatiker.ae.baudis.graphic.Primitive;
 
-public class Oval implements Primitive {
+import java.io.Serializable;
+
+public class Oval implements Primitive, Serializable {
 
     private Point middlePoint;
     private double width;

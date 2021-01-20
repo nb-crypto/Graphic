@@ -2,6 +2,10 @@ package de.fachinformatiker.ae.baudis.graphic.cmd;
 
 import de.fachinformatiker.ae.baudis.graphic.Draw;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.Scanner;
 
 public class SaveMenu implements MenuState {
@@ -21,7 +25,9 @@ public class SaveMenu implements MenuState {
         while (!exit) {
             switch (input) {
                 case "1":
-                    save();
+                    save(draw);
+                    exit = true;
+                    state = new MainMenu();
                     break;
 
                 case "x":
@@ -32,7 +38,32 @@ public class SaveMenu implements MenuState {
         return state;
     }
 
-    private void save() {
+    private void save(Draw draw) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Type the name: ");
+        String name = scanner.nextLine();
+        String filename = name + ".ser";
+        OutputStream fos = null;
+        try {
+            fos = new FileOutputStream(filename);
+            ObjectOutputStream o = new ObjectOutputStream(fos);
+            o.writeObject(draw);
+            /*o.writeInt(draw.getSizePrimitives());
+            for (int i = 0; i< draw.getSizePrimitives(); i++) {
+                o.writeObject(draw.getPrimitive(i));
+            }*/
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                fos.close();
 
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
+
 }

@@ -2,7 +2,9 @@ package de.fachinformatiker.ae.baudis.graphic.primitive;
 
 import de.fachinformatiker.ae.baudis.graphic.Primitive;
 
-public class Line implements Primitive {
+import java.io.Serializable;
+
+public class Line implements Primitive, Serializable {
 
     private Point start;
     private Point end;
