@@ -25,8 +25,8 @@ public class LoadMenu implements MenuState {
         while (!exit) {
             switch (input) {
                 case "1":
-                    //draw.drawLoad(load());
-                    load1(draw);
+                    draw.drawLoad(load());
+                    //load1(draw);
                     exit = true;
                     state = new DrawableMenu();
                     break;
@@ -73,6 +73,8 @@ public class LoadMenu implements MenuState {
             fis = new FileInputStream(filename);
             ObjectInputStream o = new ObjectInputStream(fis);
             drawLoad = (Draw) o.readObject();
+            draw.clear();
+            draw.clearGraphicObservers();
             if (drawLoad.getSizePrimitives() > 0) {
                 for (int i = 0; i < drawLoad.getSizePrimitives(); i++) {
                     draw.add(drawLoad.getPrimitive(i));

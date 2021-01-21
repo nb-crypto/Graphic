@@ -17,7 +17,7 @@ können
 
 - schreiben von Tests für die Methoden der Klassen
 
-####Tag2
+#### Tag2
 - git tag, git pull
 
 - Diskussion/Wiederholung Tag1
@@ -28,7 +28,7 @@ können
 
 - Tests aktualisiert bzw neue Tests zum Observer
 
-####Tag3
+#### Tag3
 - Überarbeitung des Observer Patterns
 
 - Wiederholung Tage 1-3

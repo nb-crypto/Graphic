@@ -95,4 +95,8 @@ public class Draw implements Primitive, GraphicObservable, Serializable {
     public int getSizeGraphicObservers() {
         return graphicObservers.size();
     }
+
+    public void clearGraphicObservers() {
+        graphicObservers.clear();
+    }
 }
