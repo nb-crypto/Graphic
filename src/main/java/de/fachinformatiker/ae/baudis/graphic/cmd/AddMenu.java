@@ -1,6 +1,5 @@
 package de.fachinformatiker.ae.baudis.graphic.cmd;
 
-import de.fachinformatiker.ae.baudis.graphic.Draw;
 import de.fachinformatiker.ae.baudis.graphic.primitive.Line;
 import de.fachinformatiker.ae.baudis.graphic.primitive.Oval;
 import de.fachinformatiker.ae.baudis.graphic.primitive.Point;
@@ -21,7 +20,7 @@ public class AddMenu implements MenuState {
     }
 
     @Override
-    public MenuState processMenu(Draw draw) {
+    public MenuState processMenu(MenuOperation menuOperation) {
         MenuState state = null;
         double[] parameters;
         Scanner scanner = new Scanner(System.in);
@@ -32,25 +31,25 @@ public class AddMenu implements MenuState {
                 case "1":
                     parameters = setParametersPoint1();
                     Point point = new Point(parameters[0], parameters[1]);
-                    draw.add(point);
+                    menuOperation.getDraw().add(point);
                     exit = true;
                     state = new DrawableMenu();
                     break;
                 case "2":
                     Line line = setParametersLine();
-                    draw.add(line);
+                    menuOperation.getDraw().add(line);
                     exit = true;
                     state = new DrawableMenu();
                     break;
                 case "3":
                     Oval oval = setParametersOval();
-                    draw.add(oval);
+                    menuOperation.getDraw().add(oval);
                     exit = true;
                     state = new DrawableMenu();
                     break;
                 case "4":
                     Rectangle rectangle = setParametersRectangle();
-                    draw.add(rectangle);
+                    menuOperation.getDraw().add(rectangle);
                     exit = true;
                     state = new DrawableMenu();
                     break;
@@ -59,17 +58,16 @@ public class AddMenu implements MenuState {
                     exit = true;
                     state = new DrawableMenu();
                     break;
+                default:
+                    System.err.println("Button does not exist! Please type again!");
+                    exit = true;
+                    state = new AddMenu();
 
             }
         }
         return state;
     }
 
-    private double[] setParameters() {
-        double[] parameters;
-
-        return null;
-    }
 
     private Point setParametersPoint() {
         Scanner scanner = new Scanner(System.in);

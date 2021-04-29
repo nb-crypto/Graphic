@@ -1,25 +1,17 @@
 package de.fachinformatiker.ae.baudis.graphic;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 
 public class Draw implements Primitive, GraphicObservable, Serializable {
 
+    private static final long serialVersionUID = 5012732945538256418L;
     private List<Primitive> primitives = new ArrayList<>();
-    private List<GraphicObserver> graphicObservers = new ArrayList<>();
+    private transient Collection<GraphicObserver> graphicObservers;
 
-
-    public void drawLoad(Draw draw){
-        if (draw != null) {
-            primitives = draw.primitives;
-            graphicObservers = draw.graphicObservers;
-        }
-    }
 
     public void add(Primitive primitive) {
         if (primitive != null) {
@@ -50,10 +42,7 @@ public class Draw implements Primitive, GraphicObservable, Serializable {
     }
 
     public Primitive getPrimitive(int i) {
-        //if (primitives.size() > i && i >= 0) {
         return primitives.get(i);
-        // }
-        //else return null;
     }
 
     public void undoAdd() {
@@ -74,29 +63,21 @@ public class Draw implements Primitive, GraphicObservable, Serializable {
     }
 
     public void removeObserver(GraphicObserver graphicObserver) {
-        graphicObservers.remove(graphicObserver);
+        if (graphicObservers != null) {
+            graphicObservers.remove(graphicObserver);
+        }
     }
 
     private void notifyObservers(String action, Primitive primitive) {
-        for (GraphicObserver o : graphicObservers) {
-            o.update(this, action, primitive);
+        if (graphicObservers != null) {
+            for (GraphicObserver o : graphicObservers) {
+                o.update(this, action, primitive);
+            }
         }
     }
 
     public void clear() {
         primitives.clear();
         notifyObservers("clear", null);
-    }
-
-    public GraphicObserver getGraphicObserver(int i) {
-        return graphicObservers.get(i);
-    }
-
-    public int getSizeGraphicObservers() {
-        return graphicObservers.size();
-    }
-
-    public void clearGraphicObservers() {
-        graphicObservers.clear();
     }
 }

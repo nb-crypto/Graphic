@@ -13,7 +13,7 @@ public class RemoveMenu implements MenuState {
     }
 
     @Override
-    public MenuState processMenu(Draw draw) {
+    public MenuState processMenu(MenuOperation menuOperation) {
         MenuState state = null;
         boolean exit = false;
         Scanner scanner = new Scanner(System.in);
@@ -21,7 +21,7 @@ public class RemoveMenu implements MenuState {
         while (!exit) {
             switch (input) {
                 case "1":
-                    remove(draw);
+                    remove(menuOperation.getDraw());
                     state = new DrawableMenu();
                     exit = true;
                     break;
@@ -29,6 +29,13 @@ public class RemoveMenu implements MenuState {
                 case "x":
                     exit = true;
                     state = new DrawableMenu();
+                    break;
+
+                default:
+                    System.err.println("Button does not exist! Please type again!");
+                    exit = true;
+                    state = new RemoveMenu();
+
             }
 
 
@@ -45,5 +52,6 @@ public class RemoveMenu implements MenuState {
         } else {
             System.out.println("Error! No Index " + input);
         }
+        System.out.println();
     }
 }

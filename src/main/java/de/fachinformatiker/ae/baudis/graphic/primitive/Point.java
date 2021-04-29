@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class Point implements Primitive, Serializable {
 
+    private static final long serialVersionUID = 393734917427065230L;
     private double x;
     private double y;
 

@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class Rectangle implements Primitive, Serializable {
 
+    private static final long serialVersionUID = -20939648195445882L;
     private Point lowerLeftPoint;
     private double width;
     private double height;

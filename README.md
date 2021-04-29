@@ -43,20 +43,27 @@ können
 - Wiederholung der Vorwoche
 - Grafikentwurf eines Menüsystems für Kommandozeilentool:
 
-![Menue](images/terminalMenue.png "Terminalmenu")
+![Menue](resources/images/terminalMenue.png "Terminalmenu")
 
 - Einführung state Pattern fürs Terminalmenü
 
 #### Tag5
 
 - UML Diagramm fürs statePattern Menü
-![UMLMenu](images/umlmenu.png)
+![UMLMenu](resources/images/umlmenu.png)
 
 - Methoden für die states des Menüs
 
 #### Tag6
 
 - save, load Funktion zum Menü hinzugefügt
+
+
+#### Tag7
+
+- bessere load und save Methoden (ohne Anlegen eines neuen Draw Objekts)
+
+- 
 
 
 ### nice to know (for me)

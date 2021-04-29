@@ -8,15 +8,15 @@ public class DrawableMenu implements MenuState {
     @Override
     public void printMenu() {
         System.out.println("Edit Drawing");
-        System.out.println("(1) add");
-        System.out.println("(2) remove");
-        System.out.println("(3) copy");
-        System.out.println("(4) list");
+        System.out.println("(1) add a primitive");
+        System.out.println("(2) remove a primitive");
+        System.out.println("(3) copy a primitive");
+        System.out.println("(4) list primitives in drawing");
         System.out.println("(x) back");
     }
 
     @Override
-    public MenuState processMenu(Draw draw) {
+    public MenuState processMenu(MenuOperation menuOperation) {
         MenuState state = null;
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -37,7 +37,7 @@ public class DrawableMenu implements MenuState {
 
                     break;
                 case "4":
-                    showDrawing(draw);
+                    showDrawing(menuOperation.getDraw());
                     state = new DrawableMenu();
                     exit = true;
                     break;
@@ -45,7 +45,10 @@ public class DrawableMenu implements MenuState {
                     exit = true;
                     state = new MainMenu();
                     break;
-
+                default:
+                    System.err.println("Button does not exist! Please type again!");
+                    exit = true;
+                    state = new DrawableMenu();
             }
         }
         return state;
@@ -53,8 +56,14 @@ public class DrawableMenu implements MenuState {
     }
 
     public void showDrawing(Draw draw) {
-        for (int i = 0; i < draw.getSizePrimitives(); i++) {
-            System.out.println("Index: " + (i + 1) + "\tPrimitive: " + draw.getPrimitive(i));
+        if (draw.getSizePrimitives() == 0){
+            System.out.println("Drawing is empty!");
+        }
+        else {
+            for (int i = 0; i < draw.getSizePrimitives(); i++) {
+                System.out.println("Primitives in Drawing: ");
+                System.out.println("\tIndex: " + (i + 1) + "\tPrimitive: " + draw.getPrimitive(i));
+            }
         }
         System.out.println();
     }

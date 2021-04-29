@@ -1,11 +1,6 @@
 package de.fachinformatiker.ae.baudis.graphic.cmd;
 
-import de.fachinformatiker.ae.baudis.graphic.Draw;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.util.Scanner;
 
 public class SaveMenu implements MenuState {
@@ -17,7 +12,7 @@ public class SaveMenu implements MenuState {
     }
 
     @Override
-    public MenuState processMenu(Draw draw) {
+    public MenuState processMenu(MenuOperation menuOperation) {
         MenuState state = null;
         boolean exit = false;
         Scanner scanner = new Scanner(System.in);
@@ -25,7 +20,7 @@ public class SaveMenu implements MenuState {
         while (!exit) {
             switch (input) {
                 case "1":
-                    save(draw);
+                    menuOperation.saveDraw();
                     exit = true;
                     state = new MainMenu();
                     break;
@@ -33,37 +28,18 @@ public class SaveMenu implements MenuState {
                 case "x":
                     exit = true;
                     state = new MainMenu();
+                    break;
+
+                default:
+                    System.err.println("Button does not exist! Please type again!");
+                    exit = true;
+                    state = new SaveMenu();
+
             }
         }
         return state;
     }
 
-    private void save(Draw draw) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Type the name: ");
-        String name = scanner.nextLine();
-        String filename = name + ".ser";
-        OutputStream fos = null;
-        try {
-            fos = new FileOutputStream(filename);
-            ObjectOutputStream o = new ObjectOutputStream(fos);
-            o.writeObject(draw);
-            /*o.writeInt(draw.getSizePrimitives());
-            for (int i = 0; i< draw.getSizePrimitives(); i++) {
-                o.writeObject(draw.getPrimitive(i));
-            }*/
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                fos.close();
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
 }

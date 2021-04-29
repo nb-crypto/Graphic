@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class Line implements Primitive, Serializable {
 
+    private static final long serialVersionUID = -2387838005944174425L;
     private Point start;
     private Point end;
 

@@ -17,7 +17,7 @@ public class LoadMenu implements MenuState {
     }
 
     @Override
-    public MenuState processMenu(Draw draw) {
+    public MenuState processMenu(MenuOperation menuOperation) {
         MenuState state = null;
         boolean exit = false;
         Scanner scanner = new Scanner(System.in);
@@ -25,8 +25,7 @@ public class LoadMenu implements MenuState {
         while (!exit) {
             switch (input) {
                 case "1":
-                    draw.drawLoad(load());
-                    //load1(draw);
+                    menuOperation.loadDraw();
                     exit = true;
                     state = new DrawableMenu();
                     break;
@@ -34,74 +33,17 @@ public class LoadMenu implements MenuState {
                 case "x":
                     exit = true;
                     state = new MainMenu();
+                    break;
+
+                default:
+                    System.err.println("Button does not exist! Please type again!");
+                    exit = true;
+                    state = new LoadMenu();
+
             }
         }
         return state;
     }
 
-    private Draw load() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Type the name of the File to load: ");
-        String name = scanner.nextLine();
-        String filename = name + ".ser";
-        InputStream fis = null;
-        try {
-            fis = new FileInputStream(filename);
-            ObjectInputStream o = new ObjectInputStream(fis);
-            return  (Draw) o.readObject();
 
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            try {
-                fis.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void load1(Draw draw) {
-        Draw drawLoad = new Draw();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Type the name of the File to load: ");
-        String name = scanner.nextLine();
-        String filename = name + ".ser";
-        InputStream fis = null;
-        try {
-            fis = new FileInputStream(filename);
-            ObjectInputStream o = new ObjectInputStream(fis);
-            drawLoad = (Draw) o.readObject();
-            draw.clear();
-            draw.clearGraphicObservers();
-            if (drawLoad.getSizePrimitives() > 0) {
-                for (int i = 0; i < drawLoad.getSizePrimitives(); i++) {
-                    draw.add(drawLoad.getPrimitive(i));
-                }
-            }
-            if (drawLoad.getSizeGraphicObservers() > 0) {
-                for (int i = 0; i < drawLoad.getSizeGraphicObservers(); i++) {
-                    draw.addObserver(drawLoad.getGraphicObserver(i));
-                }
-            }
-
-
-            /*int length = draw.getSizePrimitives();
-            for (int i = 0; i < length; i++) {
-                draw.add(draw.getPrimitive(i));
-            }*/
-
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-
-        } finally {
-            try {
-                fis.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-}
+   }

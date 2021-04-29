@@ -2,8 +2,9 @@ package de.fachinformatiker.ae.baudis.graphic.cmd;
 
 import de.fachinformatiker.ae.baudis.graphic.Draw;
 
-public interface MenuState {
+public interface MenuOperation {
 
-    void printMenu();
-    MenuState processMenu(MenuOperation menuOperation);
+    Draw getDraw();
+    void saveDraw();
+    void loadDraw();
 }

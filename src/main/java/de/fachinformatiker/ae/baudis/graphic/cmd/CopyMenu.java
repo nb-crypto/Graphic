@@ -1,6 +1,5 @@
 package de.fachinformatiker.ae.baudis.graphic.cmd;
 
-import de.fachinformatiker.ae.baudis.graphic.Draw;
 import de.fachinformatiker.ae.baudis.graphic.Primitive;
 import de.fachinformatiker.ae.baudis.graphic.primitive.Line;
 import de.fachinformatiker.ae.baudis.graphic.primitive.Oval;
@@ -19,7 +18,7 @@ public class CopyMenu implements MenuState {
     }
 
     @Override
-    public MenuState processMenu(Draw draw) {
+    public MenuState processMenu(MenuOperation menuOperation) {
         MenuState state = null;
         boolean exit = false;
         Scanner scanner = new Scanner(System.in);
@@ -27,7 +26,7 @@ public class CopyMenu implements MenuState {
         while (!exit) {
             switch (input) {
                 case "1":
-                    copy(draw);
+                    copy(menuOperation);
                     state = new DrawableMenu();
                     exit = true;
                     break;
@@ -35,6 +34,12 @@ public class CopyMenu implements MenuState {
                 case "x":
                     exit = true;
                     state = new DrawableMenu();
+                    break;
+                default:
+                    System.err.println("Button does not exist! Please type again!");
+                    exit = true;
+                    state = new CopyMenu();
+
             }
 
 
@@ -42,28 +47,28 @@ public class CopyMenu implements MenuState {
         return state;
     }
 
-    private void copy(Draw draw) {
+    private void copy(MenuOperation menuOperation) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Type index: ");
         int input = scanner.nextInt();
-        if (input <= draw.getSizePrimitives() && input > 0) {
-            Primitive toCopy = draw.getPrimitive(input - 1);
+        if (input <= menuOperation.getDraw().getSizePrimitives() && input > 0) {
+            Primitive toCopy = menuOperation.getDraw().getPrimitive(input - 1);
             Point point = new Point();
             Line line = new Line();
             Oval oval = new Oval();
             Rectangle rectangle = new Rectangle();
             if (toCopy.getClass() == point.getClass()) {
-                draw.add(new Point((Point) toCopy));
+                menuOperation.getDraw().add(new Point((Point) toCopy));
             } else if (toCopy.getClass() == line.getClass()) {
-                draw.add(new Line((Line) toCopy));
+                menuOperation.getDraw().add(new Line((Line) toCopy));
             } else if (toCopy.getClass() == oval.getClass()) {
-                draw.add(new Oval((Oval) toCopy));
+                menuOperation.getDraw().add(new Oval((Oval) toCopy));
             } else if (toCopy.getClass() == rectangle.getClass()) {
-                draw.add(new Rectangle((Rectangle) toCopy));
+                menuOperation.getDraw().add(new Rectangle((Rectangle) toCopy));
             }
         } else {
             System.out.println("Error! No Index " + input);
         }
-
+        System.out.println();
     }
 }

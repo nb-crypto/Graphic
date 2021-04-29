@@ -17,7 +17,7 @@ public class MainMenu implements MenuState {
     }
 
     @Override
-    public MenuState processMenu(Draw draw) {
+    public MenuState processMenu(MenuOperation menuOperation) {
         MenuState state = null;
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -39,7 +39,7 @@ public class MainMenu implements MenuState {
                     break;
 
                 case "2":
-                    draw.clear();
+                    menuOperation.getDraw().clear();
                     state = new DrawableMenu();
                     exit = true;
                     break;
@@ -47,6 +47,12 @@ public class MainMenu implements MenuState {
                     exit = true;
                     state = null;
                     break;
+
+                default:
+                    System.err.println("Button does not exist! Please type again!");
+                    exit = true;
+                    state = new MainMenu();
+
 
             }
         }
